@@ -1,6 +1,6 @@
 [
   {
-    "Name": "customerName",
+    "Name": "customername",
     "Type": "string",
     "Comment": ""
   },
@@ -15,37 +15,37 @@
     "Comment": ""
   },
   {
-    "Name": "birthDay",
+    "Name": "birthday",
     "Type": "string",
     "Comment": ""
   },
   {
-    "Name": "serialNumber",
+    "Name": "serialnumber",
     "Type": "string",
     "Comment": ""
   },
   {
-    "Name": "registrationDate",
+    "Name": "registrationdate",
     "Type": "bigint",
     "Comment": ""
   },
   {
-    "Name": "lastUpdateDate",
+    "Name": "lastupdatedate",
     "Type": "bigint",
     "Comment": ""
   },
   {
-    "Name": "shareWithResearchAsOfDate",
+    "Name": "sharewithresearchasofdate",
     "Type": "bigint",
     "Comment": ""
   },
   {
-    "Name": "shareWithPublicAsOfDate",
+    "Name": "sharewithpublicasofdate",
     "Type": "bigint",
     "Comment": ""
   },
   {
-    "Name": "shareWithFriendsAsOfDate",
+    "Name": "sharewithfriendsasofdate",
     "Type": "bigint",
     "Comment": ""
   }

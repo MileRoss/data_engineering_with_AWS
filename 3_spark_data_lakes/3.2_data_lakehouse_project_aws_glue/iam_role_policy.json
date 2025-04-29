@@ -30,7 +30,7 @@
         "s3:CreateBucket",
         "s3:PutBucketPublicAccessBlock"
       ],
-      "Resource": ["arn:aws:s3:::bucket-milenko"]
+      "Resource": ["arn:aws:s3:::bucketname"]
     },
     {
       "Effect": "Allow",
@@ -39,14 +39,15 @@
         "s3:PutObject",
         "s3:DeleteObject"
       ],
-      "Resource": ["arn:aws:s3:::bucket-milenko/*"]
+      "Resource": ["arn:aws:s3:::bucketname/*"]
     },
     {
       "Effect": "Allow",
       "Action": ["s3:GetObject"],
       "Resource": [
         "arn:aws:s3:::crawler-public*",
-        "arn:aws:s3:::bucket-milenko"
+        "arn:aws:s3:::bucketname",
+        "arn:aws:s3:::aws-glue-*"
       ]
     },
     {
@@ -79,13 +80,12 @@
     {
       "Effect": "Allow",
       "Action": "s3:ListBucket",
-      "Resource": "arn:aws:s3:::aws-glue-assets-684830594667-us-east-1"
+      "Resource": "arn:aws:s3:::aws-glue-assets-684830594667-region"
     },
     {
       "Effect": "Allow",
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::aws-glue-assets-684830594667-us-east-1/*"
+      "Resource": "arn:aws:s3:::aws-glue-assets-684830594667-region/*"
     }
   ]
 }
-

@@ -5,7 +5,7 @@
     "Comment": ""
   },
   {
-    "Name": "timeStamp",
+    "Name": "timestamp",
     "Type": "bigint",
     "Comment": ""
   },
