@@ -20,7 +20,7 @@ These are the tools I used and what I did with them:
 
 1.1. Created [IAM role](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/iam_role_policy.json) with required policies for the project.
 
-1.2. Cloned [GitHub Repository](https://github.com/MileRoss/data_engineering_with_AWS.git)
+1.2. Cloned this [GitHub Repository](https://github.com/MileRoss/data_engineering_with_AWS.git)
 
 1.3. Copied customer, accelerometer, and step trainer data from the cloned repo to my S3 bucket with respect to the following folder structure:
 ```
@@ -82,21 +82,23 @@ To recreate the tables, each folder [accelerometer, customer, step_trainer] in t
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_curated.jpg" width="50%">
 
 4.6. [accelerometer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.jpg)
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/accelerometer_landing.jpg" width="50%">
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.jpg" width="50%">
 
 4.7. [accelerometer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_trusted.jpg)
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/accelerometer_trusted.jpg" width="50%">
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_trusted.jpg" width="50%">
 
 4.8. [step_trainer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.jpg)
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/step_trainer_landing.jpg" width="50%">
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.jpg" width="50%">
 
 4.9. [step_trainer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.jpg)
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/step_trainer_trusted.jpg" width="50%">
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.jpg" width="50%">
 
 4.10. [machine_learning_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.jpg)
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/machine_learning_curated.jpg" width="50%">
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.jpg" width="50%">
 
-Here's a [simplified graph](https://video.udacity-data.com/topher/2023/October/6527a6fc_flowchart/flowchart.jpeg) of what I've done.
+Here's a simplified graph of this project.
+
+<img src="https://video.udacity-data.com/topher/2023/October/6527a6fc_flowchart/flowchart.jpeg" width="50%">
 
 
 ## Troubleshooting
