@@ -21,6 +21,7 @@ These are the tools I used and what I did with them:
 1.2. Cloned [GitHub Repository](https://github.com/MileRoss/data_engineering_with_AWS.git)
 
 1.3. Copied customer, accelerometer, and step trainer data from the cloned repo to my S3 bucket with respect to the following folder structure:
+```
 -bucket-milenko/
 -- accelerometer/
 --- landing/
@@ -34,6 +35,7 @@ These are the tools I used and what I did with them:
 -- step_trainer/
 --- landing/
 --- trusted/
+```
 
 2. Manually created 3 tables using Glue Data Catalog:
 2.1. [customer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing.sql)
