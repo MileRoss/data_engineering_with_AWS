@@ -1,309 +1,95 @@
-# Starter Data for the STEDI Human Balance Analysis project
+# Project: Data lakehouse for STEDI Human Balance Analysis
 
-MY INTRO:
-
-# The Challenge
-In this project, I'm a data engineer at a company called STEDI.  
-My task is to build a Data Lakehouse solution for sensor data that trains a machine learning model.  
-The STEDI team has been working on a hardware STEDI step trainer that helps users perform a balance exercise.
+# Purpose
+In this project I'm a data engineer contracted by a company called STEDI.  
+I built a Data Lakehouse solution for sensor data that trains a machine learning model.  
+I have built data pipelines using Apache Spark and AWS to store, filter, process, and transform data from STEDI users for data analytics and machine learning applications.
 
 # The Device
+The STEDI team has been working on a hardware STEDI step trainer that helps users perform a balance exercise.  
 The device has sensors that collect data to train a machine learning algorithm to detect steps.  
 It also has a companion mobile app that gathers customer data and interacts with the device sensors.  
 The step trainer is essentially a motion sensor that records the distance of the object it detects.
 
-# The Project
-At the end of the course, I'll work on a project where I’ll build data pipelines using Apache Spark to store, filter, process, and transform data from STEDI users for data analytics and machine learning applications.
+# Implementation tools and steps
 
+These are the tools I used and what I did with them:  
 
-# Tools
-AWS Glue, AWS S3, Python, and Spark
+1. CloudShell:
+1.1. Created [IAM role](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/iam_role_policy.json) with required policies for the project.
 
+1.2. Cloned [GitHub Repository](https://github.com/MileRoss/data_engineering_with_AWS.git)
 
-# Overview
+1.3. Copied customer, accelerometer, and step trainer data from the cloned repo to my S3 bucket with respect to the following folder structure:
+-bucket-milenko/
+-- accelerometer/
+--- landing/
+--- trusted/
+-- customer/
+--- curated/
+--- landing/
+--- trusted/
+-- machine_learning/
+--- curated/
+-- step_trainer/
+--- landing/
+--- trusted/
 
-The following are the complete step-by-step tasks I did to update the data from its previous version:
+2. Manually created 3 tables using Glue Data Catalog:
+2.1. [customer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing.sql)
+2.2. [accelerometer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.sql)
+2.3. [step_trainer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.sql)
+Should you wish to recreate the tables, each folder [accelerometer, customer, step_trainer] includes "...landing_edit_schema_as_json.txt" file to speed up the column creation for you.
 
-1. Download customer, accelerometer, and step trainer data from the zip file.
-2. Fix the formatting error and incomplete files. We call this the complete & cleaned data.
-3. Upload the complete & cleaned data to AWS Glue.
-4. Reduce the number of data points but do it smartly. Keep only relevant data.
-5. Redo the project with the new data.
-6. Record issues met and their solutions.
+3. Created 5 Jobs using Glue Studio Visual ETL, with each Job saving data in a new Data Catalog table:
 
-https://video.udacity-data.com/topher/2023/October/6527a6fc_flowchart/flowchart.jpeg
+3.1. [customer_landing_to_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing_to_trusted.py) Job takes the customer_landing table, keeps only those data where STEDI users accept to share their data, and saves this data in a table customer_trusted.
 
+3.2. [accelerometer_landing_to_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing_to_trusted.py) joins [accelerometer_landing, customer_trusted] tables into accelerometer_trusted table.
 
-# Highlights
+3.3. [customer_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_curated.py) joins [accelerometer_trusted, customer_trusted] tables into customer_curated.
 
-Original data:
+3.4. [step_trainer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.py) joins [step_trainer_landing, customer_curated] tables into step_trainer_trusted.
 
-* 999 rows in the customer_landing table
-* 744,413 rows in the accelerometer_landing table
-* 239,760 rows in the step_trainer_landing table.
-* When combined, there were 2+ million rows.
-* Processing the accelerometer data alone took 36+ minutes. There's no hope to process the step trainer data. Most students (all?) submitted untested projects.
-* There are customers with identical email addresses as mentioned in [this Knowledge question](https://knowledge.udacity.com/questions/999505).
+3.5. [machine_learning_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.py) joins [accelerometer_trusted, step_trainer_trusted] into machine_learning_curated.
 
-Complete & Cleaned data:
 
-* 758715 rows in the customer landing table
-* Incomplete files:
-    * customers/customers-1655295864820.json
-    * customers/customers-1655296388814.json
-    * customers/customers-1655293823654.json
-    * customers/customers-1655293823654.json
-    * accelerometer/accelerometer-1655471583651.json
-    * step_trainer/step_trainer-1655471583651.json
+4. Ran 10 queries using Athena Query Editor to test each created table against expected results provided by STEDI:
+- [customer_landing_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%201.jpg)
+- [customer_landing_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%202.jpg)
+- [customer_trusted_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%201.jpg)
+- [customer_trusted_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%202.jpg)
+- [customer_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_curated.jpg)
+- [accelerometer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.jpg)
+- [accelerometer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_trusted.jpg)
+- [step_trainer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.jpg)
+- [step_trainer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.jpg)
+- [machine_learning_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.jpg)
 
-Final/Reduced data:
+Here's a [simplified graph](https://video.udacity-data.com/topher/2023/October/6527a6fc_flowchart/flowchart.jpeg) of what I've done.
 
-* 956 customers, each with a unique email.
-    * 474 customers with empty sharewithresearchasofdate.
-* All of these customers have accelerometer and step trainer data.
-    * Join with accelerometer data on emails.
-    * Join with step trainer data on serial numbers and timestamps.
-* 81,273 accelerometer rows, no duplicates.
-* 28,680 step trainer rows, no duplicates.
-* 81,273 combined rows.
-* The entire data loading took only a bit less than 13 minutes - See the details in the Jobs section below.
-* I ran into a myriad of issues when working on this project, due to course content problems. In the Issues and Tips sections below I detailed them and recorded my solutions.
+# Troubleshooting
 
-# Queries
-## All connected rows and sanitized
+## Messy learning material
+To do this project, I had to rely on Udacity's course [Data Engineering With AWS](https://www.udacity.com/course/data-engineer-nanodegree--nd027), Course 4: Spark and Data Lakes. The material is outdated and no longer in sync with the latest version of AWS interface. Some lessons on Udacity's platform feel like a draft version with legacy and updated parts alternating. 
+Updating the course seems to be in progress, but overall it's an unacceptable state for a course using AWS in its title as a selling point. In the meantime, you should rely on the official [AWS Documentation](https://docs.aws.amazon.com/).
 
-```
-SELECT COUNT(*)
+## Unable to save a Glue Job
+What may lead you to this problem is mismatch between lessons in terms of node choices and the options tied to those choices. One lesson will ask you to choose S3 as your source node, and in the subsequent lesson the instructor says "as we have previously chosen Data Catalog source". Simmilar confusion goes on with Target node / Data Catalog update options. From the lesson "4.10  Create a Spark Job using Glue Studio" ending with asking to pick "Create a table in the Data Catalog and on subsequent runs, update the schema and add new partitions", the content moves to the lesson "4.11  Exercise: Define a Trusted Zone Path" where the pre-recorded video demonstrates the instructor going with "Do not update Catalog". If you end up picking "Create a table in the Data Catalog and on subsequent runs, update the schema and add new partitions" at this point, you won't be able to save your Job, and you may not understand why because they will only teach this later in the course. When you choose to "Create a table..." you also need to give your Job the information where to create it and how to name it.
 
-FROM "customer_cleaned_landing" cl
+## Glue Job Data Preview fails / Glue Job Run fails
+Lessons 4.7 and 4.8 demonstrate Creating the Glue Service Role. However, they miss to include the policies required to preview data in Glue Studio Visual ETL, and to Run a Glue Job. Even the lesson ends with the example job still running, so we never see if it succeeded or failed.  
+If your Data Preview fails, or your Job Run returns status Failed and not Succeeded, you may need more policies. You can use this [iam_role_policy.json](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/iam_role_policy.json) file to have all the policies you need to complete this project.
 
-    JOIN "accelerometer_cleaned_landing" al ON cl.email = al.user
+## Athena query results seem multiplied vs. what's expected
+Is your Glue Job / Target Node / Data Catalog update options / Create a table in the Data Catalog and on subsequent runs, update the schema and add new partitions ? If so, every time you run the Job, it will not overwrite the previous results but add the same results to the same folder/table that already contains the previous results. So, if you run the same Job twice, your results will be doubled.
 
-    JOIN "step_trainer_cleaned_landing" sl ON cl.serialnumber = sl.serialnumber AND al.timestamp = sl.sensorreadingtime
+## Glue Job creates empty tables
+The course instructs for Target node to pick Format: JSON and leave Compression Type field empty. If you do this, observe the auto-generated script in the Glue Job. It will says Compression Type: Snappy. If you run this Job, it will create a table, but your data will be compressed into Snappy files. Athena Query Editor can read this table, but Glue Job can't. When you wish to use this table in another Glue Job, nothing will show.
+The solution is to pick Compression Type: None.
 
-WHERE cl.sharewithresearchasofdate IS NOT NULL;
-```
+## Budget 
+Each of my 5 Glue Jobs took around 1.5 minutes to run, with default settings. Mind your budget because running them is not cheap. I wasted 25$ because of the Compression Type setting.
 
-- There are currently 2,043,198 rows.
-- Run time in Athena: 15.173 sec
-- Data scanned 316.20 MB
-
-## How many distinct emails are there?
-
-```
-SELECT COUNT(DISTINCT email) FROM "customer_cleaned_landing";
-```
-
-There are only 957 distinct emails.
-
-
-## Are there duplicates in step trainer data (duplicated `sensorreadingtime` and `serialnumber` pairs, that is)?
-
-```
-SELECT sensorreadingtime, serialnumber, COUNT(*)
-FROM step_trainer_cleaned_landing
-GROUP BY sensorreadingtime, serialnumber
-HAVING COUNT(*) > 1;
-```
-
-## Reduced data rows
-
-* Get unique customers by emails with the earliest registrationDate.
-* Get relevant accelerometer and step trainer data of those customers.
-
-```
-WITH
-    cl_distinct_emails AS (
-        SELECT *, row_number() OVER (PARTITION BY email ORDER BY email, registrationDate DESC) AS row_num
-        FROM customer_cleaned_landing
-
-    )
-SELECT DISTINCT *
-FROM cl_distinct_emails cl
-    JOIN accelerometer_cleaned_landing al
-        ON cl.email = al.user AND cl.row_num = 1
-    JOIN step_trainer_cleaned_landing sl
-        ON cl.serialnumber = sl.serialnumber
-            AND al.timestamp = sl.sensorreadingtime;
-```
-
-Results: 81,273 rows
-
-# Jobs
-
-Start-up time is always 6-7s.
-
-## customer_landing_to_trusted\.py
-
-### Old version
-
-Execution time: 54 s
-
-### New version
-
-Execution time: 56 m
-
-Size of customer_trusted: 482 rows
-
-## accelerometer_landing_to_trusted_zone\.py
-
-### Old version
-
-Execution time: 36 m 24 s
-
-### New version
-
-Execution time: 55 s
-
-Size of accelerometer_trusted: 40,981 rows
-
-## customer_trusted_to_curated\.py
-
-### Old version
-
-Execution time: who knows?
-
-### New version
-
-Execution time: 1 m 50 s
-
-Size of customer_curated: 482 rows (means all customers have accelerometer data)
-
-## step_trainer_trusted\.py
-
-### Old version
-
-Execution time: who knows?
-
-### New version
-
-Execution time: 7 m 6 s
-
-Size of step_trainer_trusted: 28,680 rows
-
-## machine_learning_curated\.py
-
-### Old version
-
-Execution time: who knows?
-
-### New version
-
-Execution time: 1 m 57 s
-
-Size of machine_learning_curated: 46,022 rows
-
-# Q&A
-
-## What does this mean? "Create a table in the Data Catalog and on subsequent runs, update the schema and add new partitions"
-
-When ticked, this means you will create a table in the Data Catalog after the run completes. You can run queries on the created table via Athena. Additionally, it will update the schema and add new partitions on subsequent runs, so you may add more columns as needed.
-
-Execution time with **keep existing schema and add new partitions**: 1m 8s
-
-Execution time with **update the schema and add new partitions**: 1m 13s
-
-I suggest activating this option.
-
-# Issues
-
-While testing the new data, I found myriads of issues in either the course or AWS. I bet the students have much more of them, so I'll list them here, so that we may let students be aware of these issues and how to deal with them.
-
-
-## Classroom video has an incorrect suggestion
-
-Transform - Filter **does not** remove NULL shareWithResearchAsOfDate field
-
-![incorrect-customer_landing_to_trusted](readme_images/incorrect-customer_landing_to_trusted.png "This filter condition does not remove NULL values")
-
-
-## Re-running a job causes data to be processed again (job bookmark = disable)
-
-**Solution: **Do not forget to delete the S3 folder before re-running a job.
-
-## customer_trusted_to_curated created many duplicates (total 40981 rows)
-
-**Solution: **Add Drop Duplicates node at the end.
-
-## trainer_trusted_to_curated is not an appropriate name (update the one in the rubric)
-
-It should be "trainer_landing_to_trusted" since it uses the trainer landing data to build trainer trusted data. "trainer_trusted_to_curated" is "machine_learning_curated" in the project.
-
-As shown in the Project Instructions page, the name is step_trainer_trusted.
-
-## step_trainer_trusted can't fully read customer_curated data
-
-There should be 482 customer curated data, but when loaded using **Data Source - S3 bucket **in trainer_trusted_to_curated, there's only 142 rows.
-
-Here's the setting in step_trainer_trusted:
-
-
-![cust_curated_issue-1](readme_images/cust_curated_issue-1.png "Step Trainer Trusted can't fully read customer curated data")
-
-
-It has only 142 rows:
-
-![cust_curated_issue-2.png](readme_images/cust_curated_issue-2.png "There are only 142 rows")
-
-
-**Solution:** Use **Data Source - Data Catalog** instead.
-
-Here's the setting:
-
-![cust_curated_issue-3.png](readme_images/cust_curated_issue-3.png "Use Data Source - Data Catalog instead")
-
-
-And the number of rows is correct now:
-
-![cust_curated_issue-4.png](readme_images/cust_curated_issue-4.png "Number of rows is correct")
-
-## step_trainer_trusted takes forever to run
-
-* Make sure that the number of rows of customer_curated and accelerometer_trusted tables are correct
-* Even when the data are correct, the standard join gives 13823760
-
-**Solution:** Use **Transform - SQL Query** and SELECT DISTINCT in your query.
-
-
-## step_trainer_trusted does not produce any data during join
-
-Use data preview with larger sample rows. Sometimes getting from glue catalog does not return complete data
-
-## Drop Fields node sometimes do not work
-
-DropFields node has dropped some fields:
-
-![dropfields_dont_work-1](readme_images/dropfields_dont_work-1.png "Selected some fields to drop")
-
-
-And the Output schema reflects this:
-
-
-
-![dropfields_dont_work-3](readme_images/dropfields_dont_work-3.png "And the output schema reflects the columns after deletion")
-
-
-Yet these deleted fields still show in the data preview:
-
-
-![dropfields_dont_work-2](readme_images/dropfields_dont_work-2.png "But the data preview still shows them deleted columns")
-
-
-**Solution:** Do not use DropDuplicates node. Perhaps this is due to the parallelism in Spark or AWS Glue itself, but for some reason some operations just don't work. Use **Transform - SQL Query** instead:
-
-![dropfields_dont_work-6](readme_images/dropfields_dont_work-6.png "Solution: Drop fields through SQL node")
-
-
-
-# Tips
-
-Here are some advice to complete this project - we may need to create content pages for them:
-
-
-
-* Use the option **Create a table in the Data Catalog and on subsequent runs, update the schema and add new partitions** so you don't have to manually recreate the tables.
-    * Note: Sometimes the output is unpredictable. For instance, when I created the step trainer trusted table, somehow it created lastupdateddate instead of sensorreadingtime field. When that happens, just delete the table (but not the S3 directory) then recreate it manually through Athena.
-* Data Preview is your friend. Click on the small gear icon next to the "Filter sample dataset" text box to adjust the number of sample rows (500 to 1000 is good, more than that is perhaps too much). **Before running your query, preview your data.**
-* Glue Jobs **don't **delete old data. When you need to re-run a job, delete the directory in the S3 bucket. When changes to the fields are needed, delete the table from Athena as well.
-* Always use a **Data Catalog** instead of an **S3 bucket **node. The former is more predictable. With the latter, sometimes it pulls partial data.
-* Despite what the course taught, **do not **use Drop Fields, Filter, and (maybe) Drop Duplicates nodes. They are **VERY** unpredictable. Use **SQL Query** nodes instead and **write your own queries**.
+# Conclusion
+This project demonstrates how to build a scalable, multi-zone data lakehouse using AWS Glue, S3, and Athena, enabling downstream machine learning and analytics applications.
