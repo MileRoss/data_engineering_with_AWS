@@ -30,14 +30,14 @@ DEFAULT_DATA_QUALITY_RULESET = """
 CustomerTrusted_node1745930402655 = glueContext.create_dynamic_frame.from_catalog(database="db-milenko", table_name="customer_trusted", transformation_ctx="CustomerTrusted_node1745930402655")
 
 # Script generated for node Accelerometer Landing
-AccelerometerLanding_node1745930403022 = glueContext.create_dynamic_frame.from_catalog(database="db-milenko", table_name="accelerometer_landing", transformation_ctx="AccelerometerLanding_node1745930403022")
+AccelerometerLanding_node1746093633106 = glueContext.create_dynamic_frame.from_options(format_options={"multiLine": "false"}, connection_type="s3", format="json", connection_options={"paths": ["s3://bucket-milenko/accelerometer/landing/"], "recurse": True}, transformation_ctx="AccelerometerLanding_node1746093633106")
 
 # Script generated for node Join
 SqlQuery0 = '''
 select al.* from al
 join ct on al.user = ct.email
 '''
-Join_node1745930406021 = sparkSqlQuery(glueContext, query = SqlQuery0, mapping = {"al":AccelerometerLanding_node1745930403022, "ct":CustomerTrusted_node1745930402655}, transformation_ctx = "Join_node1745930406021")
+Join_node1745930406021 = sparkSqlQuery(glueContext, query = SqlQuery0, mapping = {"ct":CustomerTrusted_node1745930402655, "al":AccelerometerLanding_node1746093633106}, transformation_ctx = "Join_node1745930406021")
 
 # Script generated for node Accelerometer Trusted
 EvaluateDataQuality().process_rows(frame=Join_node1745930406021, ruleset=DEFAULT_DATA_QUALITY_RULESET, publishing_options={"dataQualityEvaluationContext": "EvaluateDataQuality_node1745929011776", "enableDataQualityResultsPublishing": True}, additional_options={"dataQualityResultsPublishing.strategy": "BEST_EFFORT", "observations.scope": "ALL"})

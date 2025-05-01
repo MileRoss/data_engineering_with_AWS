@@ -27,14 +27,14 @@ DEFAULT_DATA_QUALITY_RULESET = """
 """
 
 # Script generated for node Customer Landing
-CustomerLanding_node1745929029034 = glueContext.create_dynamic_frame.from_catalog(database="db-milenko", table_name="customer_landing", transformation_ctx="CustomerLanding_node1745929029034")
+CustomerLanding_node1746093467771 = glueContext.create_dynamic_frame.from_options(format_options={"multiLine": "false"}, connection_type="s3", format="json", connection_options={"paths": ["s3://bucket-milenko/customer/landing/"], "recurse": True}, transformation_ctx="CustomerLanding_node1746093467771")
 
 # Script generated for node Share With Research
 SqlQuery0 = '''
 select * from cl
 where sharewithresearchasofdate is not null
 '''
-ShareWithResearch_node1745929032751 = sparkSqlQuery(glueContext, query = SqlQuery0, mapping = {"cl":CustomerLanding_node1745929029034}, transformation_ctx = "ShareWithResearch_node1745929032751")
+ShareWithResearch_node1745929032751 = sparkSqlQuery(glueContext, query = SqlQuery0, mapping = {"cl":CustomerLanding_node1746093467771}, transformation_ctx = "ShareWithResearch_node1745929032751")
 
 # Script generated for node Customer Trusted
 EvaluateDataQuality().process_rows(frame=ShareWithResearch_node1745929032751, ruleset=DEFAULT_DATA_QUALITY_RULESET, publishing_options={"dataQualityEvaluationContext": "EvaluateDataQuality_node1745929011776", "enableDataQualityResultsPublishing": True}, additional_options={"dataQualityResultsPublishing.strategy": "BEST_EFFORT", "observations.scope": "ALL"})
