@@ -66,35 +66,36 @@ To recreate the tables, each folder [accelerometer, customer, step_trainer] in t
 
 4. Ran 10 queries using Athena Query Editor to test each created table against expected results provided by STEDI:
 
-4.1. [customer_landing_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%201.jpg)
+4.1. [customer_landing_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%201.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%201.jpg" width="50%">
 
-4.2. [customer_landing_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%202.jpg)
+4.2. [customer_landing_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%202.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%202.jpg" width="50%">
 
-4.3. [customer_trusted_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%201.jpg)
+4.3. [customer_trusted_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%201.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%201.jpg" width="50%">
 
-4.4. [customer_trusted_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%202.jpg)
+4.4. [customer_trusted_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%202.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%202.jpg" width="50%">
 
-4.5. [customer_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_curated.jpg)
+4.5. [customer_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_curated.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_curated.jpg" width="50%">
 
-4.6. [accelerometer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.jpg)
+4.6. [accelerometer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.jpg" width="50%">
 
-4.7. [accelerometer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_trusted.jpg)
+4.7. [accelerometer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_trusted.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_trusted.jpg" width="50%">
 
-4.8. [step_trainer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.jpg)
+4.8. [step_trainer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.jpg" width="50%">
 
-4.9. [step_trainer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.jpg)
+4.9. [step_trainer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.jpg" width="50%">
 
-4.10. [machine_learning_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.jpg)
+4.10. [machine_learning_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.jpg)  
 <img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.jpg" width="50%">
+
 
 Here's a simplified graph of this project.
 
