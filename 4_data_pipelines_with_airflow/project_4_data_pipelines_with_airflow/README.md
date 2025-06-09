@@ -112,17 +112,17 @@ If the test result/s don't match the expected result/s, the operator raises an e
 
 ## How to run
 
-### clone repo
+* clone repo  
 git clone https://github.com/MileRoss/project_4_data_pipelines_with_airflow.git  
 cd project_4_data_pipelines_with_airflow
 
-### start airflow
+* start airflow  
 docker-compose up -d
 
-### access Airflow UI
+* access Airflow UI  
 http://localhost:8080
 
-### login
+* login  
 user: airflow  
 pass: airflow
 
