@@ -2,7 +2,7 @@
 
 
 ## Purpose
-* To demonstrate and practice my skills in Apache Airflow by building data pipelines to AWS platform.
+* To demonstrate and practice my skills in Apache Airflow by building data pipelines to AWS platform.  
 This included creating custom operators to execute essential functions like staging data, populating a data warehouse, and validating data through the pipeline.
 
 
@@ -24,13 +24,13 @@ This included creating custom operators to execute essential functions like stag
 	- Log data: `s3://udacity-dend/log_data`
 	- Song data: `s3://udacity-dend/song_data`
 
-Some data engineering peers complained on the [Knowledge platform](knowledge.udacity.com) that they either had problems or weren't able to complete copying the datasets to their S3 buckets, so I decided to not copy the data but use it directly from the source.
+Some data engineering peers complained on the [Knowledge platform](knowledge.udacity.com) that they either had problems (or weren't able to complete) copying the datasets to their S3 buckets, so I decided to not copy the data but use it directly from the source.
 
 
 
 ### Steps
 
-* Inspected the [project repository](https://github.com/udacity/cd12380-data-pipelines-with-airflow) provided by the client, which includes the following folders and files:
+* Inspected the client-provided [project repository](https://github.com/udacity/cd12380-data-pipelines-with-airflow), which includes the following folders and files:
 
 - [README](https://github.com/udacity/cd12380-data-pipelines-with-airflow?tab=readme-ov-file) – file with requirements and instructions  
 - [create_tables.sql](https://github.com/udacity/cd12380-data-pipelines-with-airflow/blob/main/create_tables.sql)  
@@ -65,14 +65,14 @@ Some data engineering peers complained on the [Knowledge platform](knowledge.uda
 
 ![Initial DAG](https://github.com/udacity/cd12380-data-pipelines-with-airflow/blob/main/assets/final_project_dag_graph1.png)
 
-* Added `default parameters` according to these guidelines:
+* Added `default parameters` on client's request:
 	- The DAG does not have dependencies on past runs
-	- On failure, the task are retried 3 times
-	- Retries happen every 5 minutes
 	- Catchup is turned off
+	- On failure, the tasks are retried 3 times
+	- Retries happen every 5 minutes
 	- Do not email on retry
 
-* Added the task dependencies following the requirements shown in the image below:
+* Added `task dependencies` on client's request:
 
 ![Working DAG with correct task dependencies](https://github.com/udacity/cd12380-data-pipelines-with-airflow/blob/main/assets/final_project_dag_graph2.png)
 
@@ -80,7 +80,7 @@ Some data engineering peers complained on the [Knowledge platform](knowledge.uda
 
 #### Operators
 * Built four different operators that will: 
-	- accesses my Redshift Serverless credentials and target database from the Airflow UI Connections, 
+	- access my Redshift Serverless credentials and target database from the Airflow UI Connections, 
 	- run SQL statements against my Redshift database, 
 	- stage the data from S3 bucket to the database, 
 	- transform the data, and 
@@ -110,20 +110,37 @@ If the test result/s don't match the expected result/s, the operator raises an e
 
 
 
+## How to run
+
+### clone repo
+git clone https://github.com/MileRoss/project_4_data_pipelines_with_airflow.git  
+cd project_4_data_pipelines_with_airflow
+
+### start airflow
+docker-compose up -d
+
+### access Airflow UI
+http://localhost:8080
+
+### login
+user: airflow  
+pass: airflow
+
+
+
 ## Troubleshooting
 
 
 ### Where are clusters in Redshift Serverless
-If you do this project as part of Udacity's Data Engineering with AWS Nanodegree, and your primary source of knowledge is their learning material, I hope it's updated by the time you read this.  
-You may experience that some lessons are outdated, or a mix of outdated and updated paragraphs, which makes hard to follow them.  
-"Good" example is lesson 3.12 "Configure AWS Redshift Serverless", where in the middle of it you start to struggle to find a cluster in Redshift Serverless that they're showing in the screenshot. The lesson seems to contain parts whic refer to the "old" Redshift, where you had to create a provisioned cluster, etc. In the "new" Redshift Serverless, we no longer do that. We don't create or use clusters.  
+If you do this project as part of Udacity's Data Engineering with AWS Nanodegree, and your primary source of knowledge is their learning material, some lessons are outdated, or a mix of outdated and updated paragraphs, which makes them hard to follow.  
+If you find yourself stuck in the lesson 3.12 "Configure AWS Redshift Serverless", struggling to find a cluster in Redshift Serverless that they're showing in the screenshot. The lesson seems to contain parts whic refer to the "old" Redshift, where you had to create a provisioned cluster, etc. In the "new" Redshift Serverless, we no longer do that. We don't create or use clusters.  
 The content of the official AWS documentation may be overwhelming in volume and details, but it's your best friend in these situations.
 
 
 
 ### Redshift vs Redshift Serverless
-Udacity has and gives conflicting opinions and advices regarding this choice. While the 3.12 lesson talks about the Redshift Serverless as "a tremendous cost savings. In fact, you should be able to stay within your Udacity credits.", mentors in the Knowledge platform advise against using it.  
-As I used the classic Redshift cluster in 2 previous projects, and configuring Redshift Serverless felt simple, it was my choice for this project, and I can't recommend it enough.  It is indeed cheaper than the traditional cluster, and at the time of completing this project, I only spent 8$ of my 25$ budget.  
+Udacity gives conflicting advices regarding this choice. While the 3.12 lesson talks about the Redshift Serverless as "a tremendous cost savings. In fact, you should be able to stay within your Udacity credits.", mentors in the Knowledge platform advise against using it.  
+As I used the classic Redshift cluster in 2 previous projects, and configuring Redshift Serverless felt simple, it was my choice for this project, and I can't recommend it enough. It is indeed cheaper than the traditional cluster, and at the time of completing this project, I only spent 8$ of my 25$ budget.  
 Regardless of your choice, both will do the work. You can use the same Airflow UI Connection if your username and password are same for both Redshifts, but you'd have to swap the endpoint as it determines where your DAG will stage the data to. It's best to just create 2 separate Connections and name then in a distinguishing manner.  
 
 
