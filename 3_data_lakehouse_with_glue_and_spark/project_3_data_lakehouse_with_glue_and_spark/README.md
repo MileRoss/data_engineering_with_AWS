@@ -18,7 +18,7 @@ These are the tools I used and what I did with them:
 
 1. **CloudShell**:  
 
-1.1. Created [IAM role](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/iam_role_policy.json) with required policies for the project.
+1.1. Created [IAM role](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/3.project_3_data_lakehouse_with_glue_and_spark/iam_role_policy.json) with required policies for the project.
 
 1.2. Cloned this [GitHub Repository](https://github.com/MileRoss/data_engineering_with_AWS.git)
 
@@ -42,59 +42,59 @@ These are the tools I used and what I did with them:
 
 2. Manually created 3 tables using **Glue Data Catalog**:
 
-2.1. [customer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing.sql)
+2.1. [customer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_landing.sql)
 
-2.2. [accelerometer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.sql)
+2.2. [accelerometer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/accelerometer/accelerometer_landing.sql)
 
-2.3. [step_trainer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.sql)  
+2.3. [step_trainer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/step_trainer/step_trainer_landing.sql)  
 
 To recreate the tables, each folder [accelerometer, customer, step_trainer] in this repo includes "...landing_edit_schema_as_json.txt" file to speed up the column creation for you.
 
 
 3. Created 5 Jobs using **Glue Studio Visual ETL**, with each Job saving data in a new Data Catalog table:
 
-3.1. [customer_landing_to_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing_to_trusted.py) to produce customer_trusted table.
+3.1. [customer_landing_to_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_landing_to_trusted.py) to produce customer_trusted table.
 
-3.2. [accelerometer_landing_to_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing_to_trusted.py) to produce accelerometer_trusted table.
+3.2. [accelerometer_landing_to_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/accelerometer/accelerometer_landing_to_trusted.py) to produce accelerometer_trusted table.
 
-3.3. [customer_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_curated.py) to produce customer_curated table.
+3.3. [customer_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_curated.py) to produce customer_curated table.
 
-3.4. [step_trainer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.py) to producte step_trainer_trusted table.
+3.4. [step_trainer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/step_trainer/step_trainer_trusted.py) to producte step_trainer_trusted table.
 
-3.5. [machine_learning_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.py) to produce machine_learning_curated table.
+3.5. [machine_learning_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/machine_learning_curated.py) to produce machine_learning_curated table.
 
 
 4. Ran 10 queries using Athena Query Editor to test each created table against expected results provided by STEDI:
 
-4.1. [customer_landing_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%201.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%201.jpg" width="50%">
+4.1. [customer_landing_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_landing%201.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_landing%201.jpg" width="50%">
 
-4.2. [customer_landing_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%202.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_landing%202.jpg" width="50%">
+4.2. [customer_landing_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_landing%202.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_landing%202.jpg" width="50%">
 
-4.3. [customer_trusted_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%201.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%201.jpg" width="50%">
+4.3. [customer_trusted_1](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_trusted%201.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_trusted%201.jpg" width="50%">
 
-4.4. [customer_trusted_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%202.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_trusted%202.jpg" width="50%">
+4.4. [customer_trusted_2](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_trusted%202.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_trusted%202.jpg" width="50%">
 
-4.5. [customer_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_curated.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/customer/customer_curated.jpg" width="50%">
+4.5. [customer_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_curated.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/customer/customer_curated.jpg" width="50%">
 
-4.6. [accelerometer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_landing.jpg" width="50%">
+4.6. [accelerometer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/accelerometer/accelerometer_landing.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/accelerometer/accelerometer_landing.jpg" width="50%">
 
-4.7. [accelerometer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_trusted.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/accelerometer/accelerometer_trusted.jpg" width="50%">
+4.7. [accelerometer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/accelerometer/accelerometer_trusted.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/accelerometer/accelerometer_trusted.jpg" width="50%">
 
-4.8. [step_trainer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_landing.jpg" width="50%">
+4.8. [step_trainer_landing](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/step_trainer/step_trainer_landing.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/step_trainer/step_trainer_landing.jpg" width="50%">
 
-4.9. [step_trainer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/step_trainer/step_trainer_trusted.jpg" width="50%">
+4.9. [step_trainer_trusted](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/step_trainer/step_trainer_trusted.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/step_trainer/step_trainer_trusted.jpg" width="50%">
 
-4.10. [machine_learning_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.jpg)  
-<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/machine_learning_curated.jpg" width="50%">
+4.10. [machine_learning_curated](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/machine_learning_curated.jpg)  
+<img src="https://raw.githubusercontent.com/MileRoss/data_engineering_with_AWS/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/machine_learning_curated.jpg" width="50%">
 
 
 Here's a simplified graph of this project.
@@ -113,7 +113,7 @@ What may lead you to this problem is mismatch between lessons in terms of node c
 
 ### Glue Job Data Preview fails / Glue Job Run fails
 Lessons 4.7 and 4.8 demonstrate Creating the Glue Service Role. However, they miss to include the policies required to preview data in Glue Studio Visual ETL, and to Run a Glue Job. Even the lesson ends with the example job still running, so we never see if it succeeded or failed.  
-If your Data Preview fails, or your Job Run returns status Failed and not Succeeded, you may need more policies. You can use this [iam_role_policy.json](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_spark_data_lakes/3.2_data_lakehouse_project_aws_glue/iam_role_policy.json) file to have all the policies you need to complete this project.
+If your Data Preview fails, or your Job Run returns status Failed and not Succeeded, you may need more policies. You can use this [iam_role_policy.json](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/iam_role_policy.json) file to have all the policies you need to complete this project.
 
 ### Athena query results seem multiplied vs. what's expected
 Is your Glue Job / Target Node / Data Catalog update options / Create a table in the Data Catalog and on subsequent runs, update the schema and add new partitions ? If so, every time you run the Job, it will not overwrite the previous results but add the same results to the same folder/table that already contains the previous results. So, if you run the same Job twice, your results will be doubled.
