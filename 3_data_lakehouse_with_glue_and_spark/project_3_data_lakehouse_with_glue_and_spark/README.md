@@ -18,7 +18,7 @@ These are the tools I used and what I did with them:
 
 1. **CloudShell**:  
 
-1.1. Created [IAM role](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/3.project_3_data_lakehouse_with_glue_and_spark/iam_role_policy.json) with required policies for the project.
+1.1. Created [IAM role](https://github.com/MileRoss/data_engineering_with_AWS/blob/main/3_data_lakehouse_with_glue_and_spark/project_3_data_lakehouse_with_glue_and_spark/iam_role_policy.json) with required policies for the project.
 
 1.2. Cloned this [GitHub Repository](https://github.com/MileRoss/data_engineering_with_AWS.git)
 
