@@ -12,8 +12,9 @@ This included creating custom operators to execute essential functions like stag
 
 ### Tools
 	- Local machine: MacBookAir, M1, 2020, Chip: Apple M1, Memory: 8 GB, macOS: Sequoia 15.4.1.
-	- Google Chrome: Version 136.0.7103.93 (Official Build) (arm64)
-	- Terminal: Version 2.14 (455.1)
+	- Google Chrome 136.0.7103.93 (Official Build) (arm64)
+	- Docker Desktop: 4.41.2 (191736)
+	- Terminal 2.14 (455.1)
 	- Apache Airflow 2.8.1 via Docker
 	- AWS console: IAM, Redshift Serverless
 
@@ -33,12 +34,16 @@ Some data engineering peers complained on the [Knowledge platform](knowledge.uda
 * Inspected the client-provided [project repository](https://github.com/udacity/cd12380-data-pipelines-with-airflow), which includes the following folders and files:
 
 - [README](https://github.com/udacity/cd12380-data-pipelines-with-airflow?tab=readme-ov-file) – file with requirements and instructions  
+
 - [create_tables.sql](https://github.com/udacity/cd12380-data-pipelines-with-airflow/blob/main/create_tables.sql)  
+
 - [dags](https://github.com/udacity/cd12380-data-pipelines-with-airflow/tree/main/dags)  
   - [final_project.py](https://github.com/udacity/cd12380-data-pipelines-with-airflow/blob/main/dags/final_project.py) – script containing one DAG and nine tasks  
+
 - [plugins](https://github.com/udacity/cd12380-data-pipelines-with-airflow/tree/main/plugins)  
   - [helpers](https://github.com/udacity/cd12380-data-pipelines-with-airflow/tree/main/plugins/helpers)  
     - [sql_queries.py](https://github.com/udacity/cd12380-data-pipelines-with-airflow/blob/main/plugins/helpers/sql_queries.py) – helper class with all necessary SQL transformations  
+
   - [operators](https://github.com/udacity/cd12380-data-pipelines-with-airflow/tree/main/plugins/operators)  
     - [data_quality.py](https://github.com/udacity/cd12380-data-pipelines-with-airflow/blob/main/plugins/operators/data_quality.py)  
     - [load_dimension.py](https://github.com/udacity/cd12380-data-pipelines-with-airflow/blob/main/plugins/operators/load_dimension.py)  
